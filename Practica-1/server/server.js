@@ -1,5 +1,7 @@
 var http = require('http');
 var fs = require('fs');
+var url = require('url');
+
 
 console.log("Arrancando servidor...")
 
@@ -15,7 +17,10 @@ function switchRes(req, res){
 
     }else{
 
-        fs.readFile(req.url.substr(1), function(err, data) {
+        var q = url.parse(req.url, true);
+        var filename = "." + q.pathname;
+
+        fs.readFile(filename, function(err, data) {
 
             if(err == null){
                 //found
