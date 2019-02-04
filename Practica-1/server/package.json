@@ -12,7 +12,7 @@
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/myTeachingURJC/2018-19-LTAW.git"
+    "url": "https://github.com/arodrigoca/2018-19-LTAW-practicas.git"
   },
   "scripts": {
     "start": "node server.js",
