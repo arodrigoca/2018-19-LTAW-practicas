@@ -13,7 +13,7 @@ function  send_response(req, res){
 
     fs.readFile(filename, 'utf8', (err, data) => {
         if(err == null){
-            console.log('client requested resource:', filename, ' and it was found');
+            console.log('client requested resource:', filename, 'and it was found');
             res.writeHead(200, {'Content-Type': 'text/html'});
             res.write(data);
             res.end();
@@ -24,8 +24,8 @@ function  send_response(req, res){
             res.write('Error 404. Resource not found');
             res.end(); // data, encoding, function to call when this is finished
         }
+        console.log('\n');
     });
-    console.log('Petition attended');
 }
 
 function request_handler(req, res){
