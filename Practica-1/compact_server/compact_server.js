@@ -21,11 +21,14 @@ function  send_response(req, res){
         }else{
             console.log('client requested resource:', filename, ' but cannot be found');
             res.writeHead(404, {'Content-Type': 'text/html'});
+            res.write('Error 404. Resource not found');
+            res.end(); // data, encoding, function to call when this is finished
         }
     });
+    console.log('Petition attended');
 }
 
 function request_handler(req, res){
-    console.log('Petition received');
+    console.log('Petition received from:', req.connection.remoteAddress.substring(7));
     send_response(req, res);
 }
