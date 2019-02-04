@@ -1,0 +1,21 @@
+{
+  "name": "web-server",
+  "description": "Servidor web hola mundo",
+  "keywords": [
+    "ltaw",
+    "test"
+  ],
+  "version": "0.0.1",
+  "author": "Adrián Rodrigo Castillo (arodrigoca)",
+  "main": "server.js",
+  "devDependencies": {},
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arodrigoca/2018-19-LTAW-practicas.git"
+  },
+  "scripts": {
+    "start": "node compact_server.js",
+    "test": "node -v"
+  }
+}

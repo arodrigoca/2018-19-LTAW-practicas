@@ -20,7 +20,7 @@ function switchRes(req, res){
         var q = url.parse(req.url, true); //retrieve url
         var filename = "." + q.pathname;  //retrieve filename
 
-        fs.readFile(filename,'utf8', function(err, data) {
+        fs.readFile(filename,'utf8', function(err, data) { //use readfile to read the file and check for errors
 
             if(err == null){
                 //found
