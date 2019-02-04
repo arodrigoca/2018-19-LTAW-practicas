@@ -17,10 +17,10 @@ function switchRes(req, res){
 
     }else{
 
-        var q = url.parse(req.url, true);
-        var filename = "." + q.pathname;
+        var q = url.parse(req.url, true); //retrieve url
+        var filename = "." + q.pathname;  //retrieve filename
 
-        fs.readFile(filename, function(err, data) {
+        fs.readFile(filename,'utf8', function(err, data) {
 
             if(err == null){
                 //found
