@@ -19,10 +19,19 @@ function  send_response(req, res){
             res.end();
 
         }else{
-            console.log('client requested resource:', filename, ' but cannot be found');
-            res.writeHead(404, {'Content-Type': 'text/html'});
-            res.write('Error 404. Resource not found');
-            res.end(); // data, encoding, function to call when this is finished
+            if(filename == "./" || filename == ""){
+              console.log("Client didn't request anything. Sending index");
+              fs.readFile("./", 'utf8', (err,data)=>{});
+              res.writeHead(200, {'Content-Type': 'text/html'});
+              res.write(data);
+              res.end();
+
+            }else{
+              console.log('client requested resource:', filename, ' but cannot be found');
+              res.writeHead(404, {'Content-Type': 'text/html'});
+              res.write('Error 404. Resource not found');
+              res.end(); // data, encoding, function to call when this is finished
+            }
         }
         console.log('\n');
     });
