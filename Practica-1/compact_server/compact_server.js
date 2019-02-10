@@ -23,18 +23,21 @@ function  send_response(req, res){
     fs.readFile(filename, 'utf8', (err, data) => {
         if(err == null){
             console.log('client requested resource:', filename, 'and it was found');
-            res.writeHead(200, {'Content-Type': 'text/html'});
+            var extension = filename.split(".")[2];
+            var mimeType = mime[extension];
+            console.log(mimeType);
+            res.writeHead(200, {'Content-Type': mimeType});
             res.write(data);
             res.end();
 
         }else{
             if(filename == "./" || filename == ""){
               console.log("Client didn't request anything. Sending index");
-              fs.readFile("./", 'utf8', (err,data)=>{});
-              res.writeHead(200, {'Content-Type': 'text/html'});
-              res.write(data);
-              res.end();
-
+              fs.readFile("./index.html", 'utf8', (err,data)=>{
+                res.writeHead(200, {'Content-Type': 'text/html'});
+                res.write(data);
+                res.end();
+              });
             }else{
               console.log('client requested resource:', filename, ' but cannot be found');
               res.writeHead(404, {'Content-Type': 'text/html'});
