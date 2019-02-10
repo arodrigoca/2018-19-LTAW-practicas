@@ -2,6 +2,15 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 
+const mime = {
+   'html' : 'text/html',
+   'css'  : 'text/css',
+   'jpg'  : 'image/jpg',
+   'ico'  : 'image/x-icon',
+   'mp3'  :	'audio/mpeg3',
+   'mp4'  : 'video/mp4'
+};
+
 console.log('Starting server...');
 server = http.createServer(request_handler);
 server.listen(8080);
