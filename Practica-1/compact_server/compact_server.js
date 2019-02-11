@@ -13,7 +13,7 @@ const mime = {
 
 console.log('Starting server...');
 server = http.createServer(request_handler);
-server.listen(8888);
+server.listen(8080);
 
 function  send_response(req, res){
 
