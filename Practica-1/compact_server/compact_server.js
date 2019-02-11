@@ -19,6 +19,8 @@ function  send_response(req, res){
 
     var q = url.parse(req.url, true); //retrieve url
     var filename = "static" + q.pathname;  //retrieve filename
+    var qdata = q.query; //for future use
+
 
     fs.readFile(filename, (err, data) => {
         if(err == null){
@@ -30,7 +32,7 @@ function  send_response(req, res){
             res.end();
 
         }else{
-            if(filename == "/" || filename == ""){
+            if(filename == "static/" || filename == ""){
               console.log("Client didn't request anything. Sending index");
               fs.readFile("static/index.html", 'utf8', (err,data)=>{
                 res.writeHead(200, {'Content-Type': 'text/html'});
