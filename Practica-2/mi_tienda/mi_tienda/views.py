@@ -15,23 +15,13 @@ def mi_producto(request, param): #param will be the string placed in $
     return HttpResponse(html)
 
 
-PLANTILLA = """
-<!DOCTYPE html>
-<html lang="es" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Saludo</title>
-  </head>
-  <body>
-    <p>Bienvenido a mi tienda, {{user}}</p>
-  </body>
-</html>
-"""
 
 def saludo(request):
-    # --Procesar la plantilla
-    t = Template(PLANTILLA)
 
+    fp = open('htdocs/index.html')
+    # --Procesar la plantilla
+    t = Template(fp.read())
+    fp.close
     # -- Crear el contexto: Nombre de usuario real
     c = Context({'user':'Emperador Machacasaurio'})
 
