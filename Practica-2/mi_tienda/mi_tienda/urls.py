@@ -22,6 +22,6 @@ from mi_tienda.views import saludo
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^hola/', mi_funcion),
-    url(r'^producto/(\d{1,2})/$', mi_producto),
+    url(r'^producto/(\d{1,2})/$', mi_producto), #after producto, indicate the valid template for url (2 digits) and the $ indicates parameter
     url(r'^saludo/', saludo),
 ]

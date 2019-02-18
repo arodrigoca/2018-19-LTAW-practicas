@@ -8,7 +8,7 @@ def mi_funcion(request):
 	return HttpResponse(html)
 
 
-def mi_producto(request, param): #param will be the string after /producto/
+def mi_producto(request, param): #param will be the string placed in $
 
     numero = int(param)
     html = "Acceso a producto: %i" % numero
