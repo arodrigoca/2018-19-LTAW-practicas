@@ -1,0 +1,18 @@
+
+body{
+  background-image: url("image.jpg");
+  font-family: Arial, cursive;
+}
+
+#title, #second_title{
+  color: white;
+  text-shadow:
+  -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+a{
+  color: green;
+}

@@ -21,7 +21,7 @@ def mi_producto(request, param): #param will be the string placed in $
 
 def saludo(request):
 
-    fp = open('mi_tienda/static/index.html')
+    fp = open('mi_tienda/static/saludo.html')
     # --Procesar la plantilla
     t = Template(fp.read())
     fp.close
