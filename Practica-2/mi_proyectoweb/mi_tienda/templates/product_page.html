@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <html>
 <head>
   <meta charset="UTF-8">
@@ -5,14 +6,13 @@
 </head>
 <body>
 <h1 id="title">{{p_name}}</h1>
-<p style="color:white;">{{p_options}}</p>
 
 <div>
-    <img id="ard" src="arduino_uno.jpg"/>
-    <video id="vid" src="video.mp4" controls/>
+    <img id="itmg" src="{% static {{image}} %}"/>
+    <video id="vid" src="{% static {{video}} %}" controls/>
 </div>
 <div>
-    <p>Arduino Uno: 7€</p>
+    <p>{{price}}€</p>
 </div>
 
 </body>

@@ -25,4 +25,6 @@ def list_items(request):
 def product_page(request, product_number):
 
     p_name = str(product_number)
-    return render(request, "product_page.html", {'name':p_name})
+    #get the item list
+    #get item name, stock, price, description, video and image
+    return render(request, "product_page.html", {'list':items_list})
