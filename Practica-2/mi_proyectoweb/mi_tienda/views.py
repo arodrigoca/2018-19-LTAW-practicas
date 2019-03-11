@@ -27,4 +27,6 @@ def product_page(request, product_number):
     p_name = str(product_number)
     #get the item list
     #get item name, stock, price, description, video and image
-    return render(request, "product_page.html", {'list':items_list})
+    requested = Product.objects.get(name="Arduino Uno")
+    print(requested)
+    return render(request, "product_page.html", {'p_name':p_name})
