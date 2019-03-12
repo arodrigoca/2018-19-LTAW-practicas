@@ -31,55 +31,125 @@ function  send_response(req, res){
         var user_logged = true;
     }
 
-    fs.readFile(filename, (err, data) => {
-        if(err == null){
-            if(filename == "static/login.html"){
-                if(!cookie){
-                    res.setHeader('Set-Cookie', 'user=anonymous_user1')
-                    res.setHeader('Content-Type', 'text/html')
-                    res.write(data);
-                    res.end();
-                }else{
-                    var content = `You are already signed in. <a href="index.html">Back to main page</a>`;
-                    res.setHeader('Content-Type', 'text/html');
-                    res.write(content);
-                    res.end();
-                }
-            }else if(filename == "static/buy_arduino.html"){
+    var is_buy = filename.includes("buy");
+    var is_cart = filename.includes("shopping_cart.html");
+    var is_remove = filename.includes("empty_cart.html");
 
-                res.setHeader('Set-Cookie', 'buy_arduino=1')
-                res.setHeader('Content-Type', 'text/html')
-                res.write(data);
-                res.end();
+    if(is_buy && user_logged){
+      product_list = cookie.split(";");
+      product_list = product_list[1].substr(1);
+      indx = product_list.indexOf("&");
+      product_list = product_list.substr(indx);
+      product_name = filename.split("static/");
+      product_name = product_name[1].split(".html");
+      product_name = product_name[0].split("_");
+      product_name = product_name[1];
 
-            }else{
-                console.log('client requested resource:', filename, 'and it was found');
-                let mimeType =  mime[filename.split(".")[1]];
-                console.log(mimeType);
-                res.writeHead(200, {'Content-Type': mimeType});
-                res.write(data);
-                res.end();
-            }
+      res.setHeader('Set-Cookie', 'cart_item=' + product_list + '&' + product_name);
+      res.setHeader('Content-Type', 'text/html');
+      res.write(`You bought this item. <a href="index.html">Back to main page</a>`);
+      res.end();
 
-        }else{
-            if(filename == "static/" || filename == ""){
+    }else if(is_cart && user_logged){
 
-              console.log("Client didn't request anything. Sending index");
-              fs.readFile("static/index.html", 'utf8', (err,data)=>{
-                  res.writeHead(200, {'Content-Type': 'text/html'});
+      product_list = cookie.split(";");
+      if(product_list[1] != undefined){
+        product_list = product_list[1].substr(1);
+        product_list = product_list.split("&");
+        product_list.splice(0, 1);
+        var activate = true;
+      }
+
+      res.setHeader('Content-Type', 'text/html');
+
+      content = `<html>
+      <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styleA.css">
+      </head>
+      <body>
+      <h1 id="title">Shopping Cart</h1>
+      <p style="color:white;">Item list:</p>`;
+      if(activate == true){
+        for (i = 0; i < product_list.length; i++) {
+          content = content + `<li style="color:white;">` + product_list[i] + `</li>`;
+        }
+      }
+
+      content = content +
+
+      `
+      <div>
+          <a id="empty" href="empty_cart.html">Empty shopping cart</a>
+      </div>
+      <div>
+          <a href="index.html">Go to main page</a>
+      </div>
+
+      </body>
+      </html>`;
+      console.log(content);
+
+      res.write(content);
+      res.end();
+
+    }else if(is_remove && user_logged){
+      var content = `Shopping cart is now empty. <a href="index.html">Back to main page</a>`
+      res.setHeader('Set-Cookie', 'cart_item=');
+      res.setHeader('Content-Type', 'text/html');
+      res.write(content);
+      res.end();
+
+
+    }else{
+
+
+      fs.readFile(filename, (err, data) => {
+          if(err == null){
+              if(filename == "static/login.html"){
+                  if(!cookie){
+                      res.setHeader('Set-Cookie', 'user=anonymous_user1')
+                      res.setHeader('Set-Cookie', 'cart_item=')
+                      res.setHeader('Content-Type', 'text/html')
+                      res.write(data);
+                      res.end();
+                  }else{
+                      var content = `You are already signed in. <a href="index.html">Back to main page</a>`;
+                      res.setHeader('Content-Type', 'text/html');
+                      res.write(content);
+                      res.end();
+                  }
+
+              }else{
+                  console.log('client requested resource:', filename, 'and it was found');
+                  let mimeType =  mime[filename.split(".")[1]];
+                  console.log(mimeType);
+                  res.writeHead(200, {'Content-Type': mimeType});
                   res.write(data);
                   res.end();
-              });
+              }
 
-            }else{
-              console.log('client requested resource:', filename, ' but cannot be found');
-              res.writeHead(404, {'Content-Type': 'text/html'});
-              res.write('Error 404. Resource not found');
-              res.end(); // data, encoding, function to call when this is finished
-            }
-        }
-        console.log('\n');
-    });
+          }else{
+              if(filename == "static/" || filename == ""){
+
+                console.log("Client didn't request anything. Sending index");
+                fs.readFile("static/index.html", 'utf8', (err,data)=>{
+                    res.writeHead(200, {'Content-Type': 'text/html'});
+                    res.write(data);
+                    res.end();
+                });
+
+              }else{
+                console.log('client requested resource:', filename, ' but cannot be found');
+                res.writeHead(404, {'Content-Type': 'text/html'});
+                content = `404 Error. Resource not found or you are not logged in. Please log-in on the main page. <a href="index.html">Back to main page</a>`;
+                res.write(content);
+                res.end(); // data, encoding, function to call when this is finished
+              }
+          }
+          console.log('\n');
+      });
+    }
 }
 
 function request_handler(req, res){
