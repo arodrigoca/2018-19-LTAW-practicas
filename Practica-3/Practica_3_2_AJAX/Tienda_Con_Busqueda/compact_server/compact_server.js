@@ -11,6 +11,14 @@ const mime = {
    'mp4'  : 'video/mp4'
 };
 
+var products_database = {  //poor man´s database
+    '0' : 'arduinouno',
+    '1' : 'arduinomega',
+    '2' : 'arduinopromini',
+    '3' : 'raspberrypizerow',
+    '4' : 'raspberrypi3b'
+};
+
 console.log('Starting server...');
 server = http.createServer(request_handler);
 server.listen(8080);
