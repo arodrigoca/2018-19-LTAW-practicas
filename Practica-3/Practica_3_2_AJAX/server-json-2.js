@@ -44,6 +44,8 @@ http.createServer((req, res) => {
 
       //-- Contenido en formato JSON
       //-- Es lo que se va a devolver en la petición
+      var params = q.query;
+      console.log(params);
       content = `
       {
         "productos": ["FPGA", "RISC-V", "74ls00"]

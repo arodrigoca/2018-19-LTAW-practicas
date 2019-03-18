@@ -16,7 +16,7 @@ function main()
     m = new XMLHttpRequest();
 
     //-- Configurar la petición
-    m.open("GET","http://localhost:8080/myquery", true);
+    m.open("GET","http://localhost:8080/myquery?param1=hola&param2=wei", true);
 
     //-- Cuando la haya alguna noticia sobre la peticion
     //-- ejecuta este código
