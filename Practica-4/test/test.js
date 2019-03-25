@@ -48,25 +48,25 @@ io.on('connection', function(socket){
        switch(msg){
 
            case '/help':
-            socket.emit('new_message', 'SERVER MESSAGE: Commands: /help, /list, /hello, /date');
+            socket.emit('server_message', 'SERVER MESSAGE: Commands: /help, /list, /hello, /date');
             break;
 
            case '/list':
-            socket.emit('new_message', 'SERVER MESSAGE: User list: ' + user_number);
+            socket.emit('server_message', 'SERVER MESSAGE: User list: ' + user_number);
             break;
 
            case '/hello':
-            socket.emit('new_message', 'SERVER MESSAGE: Hello! Ping to server was successful.');
+            socket.emit('server_message', 'SERVER MESSAGE: Hello! Ping to server was successful.');
             break;
 
            case '/date':
             console.log('/date');
             var date = new Date();
-            socket.emit('new_message', 'SERVER MESSAGE: ' + date);
+            socket.emit('server_message', 'SERVER MESSAGE: ' + date);
             break;
 
            default:
-            socket.emit('new_message', 'SERVER MESSAGE: I don´t know that command...yet!');
+            socket.emit('server_message', 'SERVER MESSAGE: I don´t know that command...yet!');
        }
    }else{
        io.emit('new_message', msg);
