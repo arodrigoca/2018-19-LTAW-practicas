@@ -5,8 +5,16 @@ function main() {
   var display = document.getElementById('display');
   var msg = document.getElementById('msg');
 
+  msg.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("send").click();
+  }
+});
+
   send.onclick = ()=> {
       socket.emit('new_message', msg.value);
+      document.getElementById('msg').innerHTML.value = "";
       console.log('message emitted');
   }
 
