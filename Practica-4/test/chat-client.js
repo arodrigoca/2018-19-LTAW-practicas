@@ -4,6 +4,7 @@ function main() {
   var send = document.getElementById('send');
   var display = document.getElementById('display');
   var msg = document.getElementById('msg');
+  var msgs_on_screen = 0;
 
   msg.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
@@ -19,7 +20,15 @@ function main() {
   }
 
   socket.on('new_message', msg => { //when a new message is received, print it in display element
+    if(msgs_on_screen <= 15){ //clean message window if there is too much messages
      display.innerHTML = display.innerHTML + msg + '<br>';
+     msgs_on_screen = msgs_on_screen + 1;
+     //console.log(msgs_on_screen);
+   }else{
+     display.innerHTML = msg + '<br>';
+     msgs_on_screen = 0;
+   }
+
    });
 
 }

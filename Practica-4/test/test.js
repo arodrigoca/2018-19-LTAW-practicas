@@ -3,6 +3,8 @@ const app = express()
 const http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+var user_number = 0;
+
 //-- Puerto donde lanzar el servidor
 const PORT = 8080
 
@@ -30,11 +32,13 @@ http.listen(PORT, function(){
 
 io.on('connection', function(socket){
   console.log('--> User connected on your channel!');
+  user_number = user_number + 1;
   socket.emit('new_message', 'Welcome to the chat, user');
   io.emit('new_message', 'new user connected to the chat'); //io.emit means broadcast. socket.emit is unicast
 
   socket.on('disconnect', function(){                      //on disconnect event
     console.log('--> User disconnected from your channel');
+    user_number = user_number - 1;
   });
 
   socket.on('new_message', msg => {                        //on new message event
@@ -47,7 +51,7 @@ io.on('connection', function(socket){
             break;
 
            case '/list':
-            socket.emit('new_message', 'SERVER MESSAGE: User list:');
+            socket.emit('new_message', 'SERVER MESSAGE: User list: ' + user_number);
             break;
 
            case '/hello':
