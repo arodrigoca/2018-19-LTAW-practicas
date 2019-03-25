@@ -11,7 +11,7 @@ function main() {
   }
 
   socket.on('new_message', msg => { //when a new message is received, print it in display element
-     display.innerHTML = display.innerHTML + msg + '\n';
+     display.innerHTML = display.innerHTML + msg + '<br>';
    });
 
 }
