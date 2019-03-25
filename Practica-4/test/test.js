@@ -38,6 +38,7 @@ io.on('connection', function(socket){
 
   socket.on('disconnect', function(){                      //on disconnect event
     console.log('--> User disconnected from your channel');
+    io.emit('new_message', 'an user left the chat');
     user_number = user_number - 1;
   });
 
