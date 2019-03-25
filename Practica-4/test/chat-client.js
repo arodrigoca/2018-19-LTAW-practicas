@@ -14,9 +14,12 @@ function main() {
 });
 
   send.onclick = ()=> {
-      socket.emit('new_message', msg.value);
-      document.getElementById('msg').innerHTML.value = "";
-      console.log('message emitted');
+      if(msg.value != "" && msg.value != " "){
+        socket.emit('new_message', msg.value);
+        //document.getElementById('msg').innerHTML.value = "";
+        document.getElementById('msg').value = "";
+        console.log('message emitted');
+      }
   }
 
   socket.on('new_message', msg => { //when a new message is received, print it in display element
