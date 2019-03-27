@@ -42,6 +42,7 @@ function  send_response(req, res){
     var is_buy = filename.includes("buy");
     var is_cart = filename.includes("shopping_cart.html");
     var is_remove = filename.includes("empty_cart.html");
+    var is_search = filename.includes("search_item");
 
     if(is_buy && user_logged){
       product_list = cookie.split(";");
@@ -108,6 +109,13 @@ function  send_response(req, res){
       res.write(content);
       res.end();
 
+    }else if(is_search){
+        let query = filename.split("=");
+        query = query[1];
+        console.log("user wants to search by: " + query);
+        res.setHeader('Content-Type', 'text/plain');
+        res.write(`arduino`);
+        res.end();
 
     }else{
 
