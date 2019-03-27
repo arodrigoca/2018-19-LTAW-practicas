@@ -24,18 +24,18 @@ function main() {
 
   socket.on('new_message', msg => { //when a new message is received, print it in display element
     if(msgs_on_screen <= 15){ //clean message window if there is too much messages
-     display.innerHTML = display.innerHTML + '<div>' + msg + '</div>';
+     display.innerHTML = display.innerHTML + '<li>' + msg + '</li>';
      msgs_on_screen = msgs_on_screen + 1;
      //console.log(msgs_on_screen);
    }else{
-     display.innerHTML = msg + '<br>';
+     display.innerHTML = '<li>' + msg + '<li>';
      msgs_on_screen = 0;
    }
 
    });
 
    socket.on('server_message', msg =>{                      //on server message
-     display.innerHTML = display.innerHTML + '<div style="color: #0900C4">' + msg + '</div>';
+     display.innerHTML = display.innerHTML + '<li style="color: #0900C4">' + msg + '</li>';
      msgs_on_screen = msgs_on_screen + 1;
    });
 
