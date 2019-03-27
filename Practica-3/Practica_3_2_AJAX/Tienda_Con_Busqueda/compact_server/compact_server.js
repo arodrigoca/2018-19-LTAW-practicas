@@ -109,12 +109,18 @@ function  send_response(req, res){
       res.write(content);
       res.end();
 
-    }else if(is_search){
+    }else if(is_search){ //search by string
         let query = filename.split("=");
+        let found_items = {};
         query = query[1];
-        console.log("user wants to search by: " + query);
-        res.setHeader('Content-Type', 'text/plain');
-        res.write(`arduino`);
+        //console.log("user wants to search by: " + query);
+        for(var i = 0; i < Object.keys(products_database).length; i++){
+          if(products_database[i].includes(query)){
+            found_items[i] = products_database[i];
+          }
+        }
+        res.setHeader('Content-Type', 'application/json')
+        res.write(JSON.stringify(found_items));
         res.end();
 
     }else{
