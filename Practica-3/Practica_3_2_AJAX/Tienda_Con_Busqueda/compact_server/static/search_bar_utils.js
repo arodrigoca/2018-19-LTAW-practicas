@@ -1,7 +1,7 @@
 
 function search_action(event){
   //console.log("User pressed a key inside the search bar");
-  console.log("normal key");
+  //console.log("normal key");
   var search_bar = document.getElementById('search_bar');
   var search_bar_value = search_bar.value;
   var dropdown = document.getElementById('dropdown');
