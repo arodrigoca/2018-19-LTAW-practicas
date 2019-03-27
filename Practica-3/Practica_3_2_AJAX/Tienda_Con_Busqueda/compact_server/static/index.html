@@ -2,6 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="search_bar_utils.js"></script>
 </head>
 <body>
 <h1 id="title">Welcome to DeLorean Electronics web page</h1>
@@ -11,10 +12,11 @@
 <p id="second_title" style="color:white;">Here you can buy this products:</p>
 
 <div>
-    <form>
+    <!--<form>
         <input type="search" placeholder="Search.." name="search">
         <button type="submit">Search</button>
-    </form>
+    </form>-->
+    <input onkeypress="search_action()" type="search" placeholder = "Search.." name="search">
 </div>
 
 <div>

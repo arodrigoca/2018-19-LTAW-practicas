@@ -8,7 +8,8 @@ const mime = {
    'jpg'  : 'image/jpg',
    'ico'  : 'image/x-icon',
    'mp3'  :	'audio/mpeg3',
-   'mp4'  : 'video/mp4'
+   'mp4'  : 'video/mp4',
+   'js'   : 'text/javascript'
 };
 
 var products_database = {  //poor man´s database
