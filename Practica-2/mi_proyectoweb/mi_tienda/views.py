@@ -24,11 +24,6 @@ def list_items(request):
     return HttpResponse(html)
 
 
-def form_view(request):
-
-    return render(request, "name.html")
-
-
 def product_page(request, product_number):
 
     p_name = str(product_number)
