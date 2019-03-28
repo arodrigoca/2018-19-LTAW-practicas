@@ -1,0 +1,13 @@
+body {
+  background-image: url('../media/image.jpg')
+}
+
+form{
+  color: green;
+  font-size: 50px;
+  text-shadow:
+  -1px -1px 0 #000,
+   1px -1px 0 #000,
+  -1px 1px 0 #000,
+   1px 1px 0 #000;
+}

@@ -8,8 +8,8 @@
 <h1 id="title">{{p_name}}</h1>
 
 <div>
-    <img id="itmg" src="{% static {{image}} %}"/>
-    <video id="vid" src="{% static {{video}} %}" controls/>
+    <img id="itmg" src="{% static 'media/{image}' %}"/>
+    <video id="vid" src="{% static 'media/{video}' %}" controls/>
 </div>
 <div>
     <p>{{price}}€</p>
