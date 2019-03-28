@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from mi_tienda.models import Product
+from mi_tienda.models import Order
 
 from mi_tienda.forms import orderForm
 
@@ -45,7 +46,8 @@ def get_order(request):
             # process the data in form.cleaned_data as required
             # ...
             data = form.cleaned_data
-            print(data)
+            ord = Order(item=data['item'], quantity=data['quantity'], total_price=100, address=data['address'], username=data['username'])
+            #ord.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/')
 
