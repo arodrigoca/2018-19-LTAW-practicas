@@ -25,15 +25,13 @@ def list_items(request):
     return HttpResponse(html)
 
 
-def product_page(request, product_number):
+def product_page(request, product_name):
 
-    p_name = str(product_number)
     #get the item list
     #get item name, stock, price, description, video and image
-    requested = Product.objects.get(name="arduino_uno")
-    image_url = ""
-    video_url = ""
-    return render(request, "product_page.html", {'p_name':p_name, 'image':image_url, 'video':video_url})
+    requested = Product.objects.get(name=product_name)
+    print(requested.item_image)
+    return render(request, "product_page.html", {'p_name':requested.name, 'image':requested.item_image, 'video':requested.item_video_url, 'price':requested.price})
 
 
 def get_order(request):
@@ -46,10 +44,12 @@ def get_order(request):
             # process the data in form.cleaned_data as required
             # ...
             data = form.cleaned_data
-            ord = Order(item=data['item'], quantity=data['quantity'], total_price=100, address=data['address'], username=data['username'])
-            #ord.save()
+            item_price = Product.objects.all().filter(name__contains=data['item'])[0].price
+            order_price = item_price * data['quantity']
+            ord = Order(item=data['item'], quantity=data['quantity'], address=data['address'], username=data['username'], total_price=order_price)
+            ord.save()
             # redirect to a new URL:
-            return HttpResponseRedirect('/')
+            return HttpResponse('<p>Your order has been placed.</p><a href="../">Return to main page</a>')
 
     # if a GET (or any other method) we'll create a blank form
     else:
