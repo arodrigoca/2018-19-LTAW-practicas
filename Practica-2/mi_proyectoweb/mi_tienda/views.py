@@ -37,18 +37,10 @@ def product_page(request, product_name):
 
 def search_item(request):
 
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = searchForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            data = form.cleaned_data
-            print(data)
-            # redirect to a new URL:
-            return HttpResponse('<p>This is your search</p><a href="../">Return to main page</a>')
+    if request.method == 'GET':
 
+        search_query = request.GET.get('search_box', None)
+        return HttpResponse('<p>this is a placeholder</p>')
 
 
 def get_order(request):
