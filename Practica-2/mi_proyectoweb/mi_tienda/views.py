@@ -41,9 +41,11 @@ def search_item(request):
 
         search_query = request.GET.get('search_box', None)
         matches = Product.objects.filter(name__contains=search_query)
+        html = "<p>Item list</p>"
         for item in matches:
             print(item.name)
             html += '<p>'+ item.name + ' ' + str(item.price) + '<p>'
+
         return HttpResponse(html)
 
 
