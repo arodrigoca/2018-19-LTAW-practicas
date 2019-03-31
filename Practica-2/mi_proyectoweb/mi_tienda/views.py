@@ -40,8 +40,11 @@ def search_item(request):
     if request.method == 'GET':
 
         search_query = request.GET.get('search_box', None)
-        print(search_query)
-        return HttpResponse('<p>this is a placeholder</p>')
+        matches = Product.objects.filter(name__contains=search_query)
+        for item in matches:
+            print(item.name)
+            html += '<p>'+ item.name + ' ' + str(item.price) + '<p>'
+        return HttpResponse(html)
 
 
 def get_order(request):
