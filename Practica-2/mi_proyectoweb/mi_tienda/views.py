@@ -35,6 +35,22 @@ def product_page(request, product_name):
     return render(request, "product_page.html", {'p_name':requested.name, 'image':image_path, 'video':video_path, 'price':requested.price})
 
 
+def search_item(request):
+
+    f request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = searchForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            data = form.cleaned_data
+            print(data)
+            # redirect to a new URL:
+            return HttpResponse('<p>This is your search</p><a href="../">Return to main page</a>')
+
+
+
 def get_order(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':

@@ -15,3 +15,8 @@ class orderForm(forms.Form):
     quantity = forms.IntegerField()
     address = forms.CharField(max_length=200)
     username = forms.CharField(max_length=200)
+
+
+class searchForm(forms.Form):
+
+    keyword = forms.CharField(max_length=50)
