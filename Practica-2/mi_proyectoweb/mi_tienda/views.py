@@ -37,7 +37,7 @@ def product_page(request, product_name):
 
 def search_item(request):
 
-    f request.method == 'POST':
+    if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = searchForm(request.POST)
         # check whether it's valid:
