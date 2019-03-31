@@ -7,5 +7,11 @@
 </head>
 <body>
   <h1>This are the products that matches your search</h1>
+  <br>
+  <div>
+    {% for item in item_list %}
+        {{item}}
+    {% endfor %}
+  </div>
 </body>
 </html>

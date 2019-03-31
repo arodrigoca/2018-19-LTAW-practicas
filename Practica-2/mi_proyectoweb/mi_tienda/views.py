@@ -46,7 +46,7 @@ def search_item(request):
             name_matches.append(match.name)
 
         print name_matches
-        return render(request, "search_page.html")
+        return render(request, "search_page.html", {item_list: name_matches})
 
 
 def get_order(request):
