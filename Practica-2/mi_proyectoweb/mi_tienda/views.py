@@ -41,7 +41,11 @@ def search_item(request):
 
         search_query = request.GET.get('search_box', None)
         matches = Product.objects.filter(name__contains=search_query)
-        print(matches[0].name)
+        name_matches = []
+        for match in matches:
+            name_matches.push(match.name)
+
+        print name_matches
         return render(request, "search_page.html")
 
 
