@@ -41,8 +41,7 @@ def search_item(request):
 
         search_query = request.GET.get('search_box', None)
         matches = Product.objects.filter(name__contains=search_query)
-        html = "<p>Item list</p>"
-
+        print(matches)
         return render(request, "search_page.html")
 
 
