@@ -40,6 +40,7 @@ def search_item(request):
     if request.method == 'GET':
 
         search_query = request.GET.get('search_box', None)
+        print(search_query)
         return HttpResponse('<p>this is a placeholder</p>')
 
 
