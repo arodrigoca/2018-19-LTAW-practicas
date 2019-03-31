@@ -1,5 +1,7 @@
 body{
-  background-image: url("image.jpg");
+  
+    background-color: lightblue;
+    background-image: url('../media/image.jpg')
 }
 
 #title{
