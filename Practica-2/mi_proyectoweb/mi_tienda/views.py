@@ -30,8 +30,9 @@ def product_page(request, product_name):
     #get the item list
     #get item name, stock, price, description, video and image
     requested = Product.objects.get(name=product_name)
-    print(requested.item_image)
-    return render(request, "product_page.html", {'p_name':requested.name, 'image':requested.item_image, 'video':requested.item_video_url, 'price':requested.price})
+    image_path = 'media/' + requested.item_image
+    video_path = 'media/' + requested.item_video_url
+    return render(request, "product_page.html", {'p_name':requested.name, 'image':image_path, 'video':video_path, 'price':requested.price})
 
 
 def get_order(request):
