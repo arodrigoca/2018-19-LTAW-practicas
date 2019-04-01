@@ -8,6 +8,8 @@ var user_number = 0;
 //-- Puerto donde lanzar el servidor
 const PORT = 8080
 
+var user_db = {}
+
 //-- Punto de entrada pricipal
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
@@ -33,12 +35,21 @@ http.listen(PORT, function(){
 io.on('connection', function(socket){
   console.log('--> User connected on your channel!');
   user_number = user_number + 1;
-  socket.emit('new_message', 'Welcome to the chat, user');
-  io.emit('new_message', 'new user connected to the chat'); //io.emit means broadcast. socket.emit is unicast
+  var random = Math.floor(Math.random() * 9999) + 1;
+  random = random.toString()
+  var user_name = 'User' + random;
+  var user_id = socket.id;
+  //console.log(user_cookie);
+  user_db[user_id] = user_name;
+  socket.emit('server_message', 'SERVER MESSAGE: ' + 'Welcome to the chat, ' + user_name);
+  io.emit('server_message', 'SERVER MESSAGE: ' + user_name + ' connected to the chat'); //io.emit means broadcast. socket.emit is unicast
 
-  socket.on('disconnect', function(){                      //on disconnect event
+  socket.on('disconnect', function(){
+    var user_id = socket.id
+    var user_name = user_db[user_id]                 //on disconnect event
     console.log('--> User disconnected from your channel');
-    io.emit('new_message', 'an user left the chat');
+    io.emit('server_message', 'SERVER MESSAGE: ' + user_name + ' left the chat');
+    delete user_db[user_id];
     user_number = user_number - 1;
   });
 
@@ -69,7 +80,9 @@ io.on('connection', function(socket){
             socket.emit('server_message', 'SERVER MESSAGE: I don´t know that command...yet!');
        }
    }else{
-       io.emit('new_message', msg);
+       var user_id = socket.id
+       var user_name = user_db[user_id]
+       io.emit('new_message', user_name + ': ' + msg);
    }
 
 });
