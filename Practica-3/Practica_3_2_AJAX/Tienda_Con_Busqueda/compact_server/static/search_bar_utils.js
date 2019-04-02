@@ -14,7 +14,7 @@ function search_action(event){
      var dropdown_dict = JSON.parse(this.responseText);
      dropdown.innerHTML = "";
      for(x in dropdown_dict){
-       dropdown.innerHTML = dropdown.innerHTML + '<li style="color:black"><a class="searchlink" href="arduinos.html">' + dropdown_dict[x] + '</a>' + '</li>';
+       dropdown.innerHTML = dropdown.innerHTML + '<li style="color:black"><a class="searchlink">' + dropdown_dict[x] + '</a>' + '</li>';
      }
    }
   };

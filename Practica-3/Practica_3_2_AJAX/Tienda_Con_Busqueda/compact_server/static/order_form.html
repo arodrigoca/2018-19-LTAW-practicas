@@ -1,0 +1,27 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="order_form">
+<form action="/order_form" method="post">
+  <input type="text" name="nombre">Nombre</input>
+  <br>
+  <input type="text" name="apellidos">Apellidos</input>
+  <br>
+  <input type="text" name="correo electronico">Correo Electrónico</input>
+  <br>
+  <input type="text" name="direccion">Dirección</input>
+  <br>
+  <select name="metodo de pago">
+    <option value="paypal">Paypal</option>
+    <option value="tarjeta_de_credito">Tarjeta de crédito</option>
+    <option value="transferencia_bancaria">Transferencia bancaria</option>
+  </select>
+  <input type="submit" value="Enviar"/>
+</form>
+<a style="color:white" href="../index.html">Go back to main page</a>
+</div>
+</body>
+</html>

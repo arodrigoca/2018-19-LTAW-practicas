@@ -12,32 +12,18 @@
 <p id="second_title" style="color:white;">Here you can buy this products:</p>
 
 <div>
+  <form method="post" action="/items_query">
     <input id="search_bar" autocomplete="off" onkeyup="backspace_detect(event)" onkeypress="search_action(event)" type="search" placeholder = "Search.." name="search">
+    <input type="submit" value="Submit"></input>
+  </form>
     <div id="dropdown">
     </div>
 </div>
-
-<br>
-
-<div>
-    <a class="normalink" href="arduinos.html">Arduinos</a>
-</div>
-
-<div>
-    <a class="normalink" "normalink" href="https://www.raspberrypi.org/products/">Raspberrys</a>
-</div>
-
-<div>
-    <a class="normalink" href="https://store.arduino.cc/">Arduinos again</a>
-</div>
-
-<div>
-    <a class="normalink" href="https://www.digikey.com/products/en">Electronic components</a>
-<div>
-<br>
 <div>
     <a id="shopping_cart" href="shopping_cart.html">Click here to go to shopping cart</a>
 </div>
-
+</div>
+<br>
+<a style="color:white" href="order_form.html">Click here to make your order</a>
 </body>
 </html>

@@ -13,11 +13,11 @@ const mime = {
 };
 
 var products_database = {  //poor man´s database
-    '0' : 'arduinouno',
-    '1' : 'arduinomega',
-    '2' : 'arduinopromini',
-    '3' : 'raspberrypizerow',
-    '4' : 'raspberrypi3b'
+    '0' : ['arduinouno', 'arduino_uno.html'],
+    '1' : ['arduinomega', 'arduino_mega.html'],
+    '2' : ['arduinopromini', 'arduino_pro_mini.html'],
+    '3' : ['raspberrypizerow', 'rpizw.html'],
+    '4' : ['raspberrypi3b', 'rpi3.html']
 };
 
 console.log('Starting server...');
@@ -28,6 +28,7 @@ function  send_response(req, res){
 
     var q = url.parse(req.url, true); //retrieve url
     var filename = "static" + q.pathname;  //retrieve filename
+    //console.log(filename)
     var qdata = q.query; //for future use
 
     var cookie = req.headers.cookie;
@@ -43,6 +44,8 @@ function  send_response(req, res){
     var is_cart = filename.includes("shopping_cart.html");
     var is_remove = filename.includes("empty_cart.html");
     var is_search = filename.includes("search_item");
+    var is_search_bar = filename.includes("items_query");
+    console.log(is_search_bar);
 
     if(is_buy && user_logged){
       product_list = cookie.split(";");
@@ -115,13 +118,42 @@ function  send_response(req, res){
         query = query[1];
         //console.log("user wants to search by: " + query);
         for(var i = 0; i < Object.keys(products_database).length; i++){
-          if(products_database[i].includes(query)){
-            found_items[i] = products_database[i];
+          if(products_database[i][0].includes(query)){
+            found_items[i] = products_database[i][0];
           }
         }
         res.setHeader('Content-Type', 'application/json')
         res.write(JSON.stringify(found_items));
         res.end();
+
+    }else if(is_search_bar){
+
+      if (req.method === 'POST') {
+
+        req.on('data', chunk => {
+            //-- Leer los datos (convertir el buffer a cadena)
+            data = chunk.toString('utf-8');
+            data = data.split("=")[1];
+         });
+
+         req.on('end', ()=> {
+           //-- Generar el mensaje de respuesta
+           html_data = "<h3>Here are the items that match your search query:</h3>";
+           let found_items = {};
+           for(var i = 0; i < Object.keys(products_database).length; i++){
+             if(products_database[i][0].includes(data)){
+               found_items[i] = products_database[i];
+             }
+           }
+           for(item in found_items){
+             html_data += '<li style="color:black"><a class="searchlink">' + found_items[item][0] + '</a>' + '</li>';
+           }
+           html_data += "<br><a href='index.html'>Go back to main page</a>"
+           res.setHeader('Content-Type', 'text/html');
+           res.write(html_data);
+           res.end();
+         });
+       }
 
     }else{
 
@@ -152,6 +184,7 @@ function  send_response(req, res){
               }
 
           }else{
+
               if(filename == "static/" || filename == ""){
 
                 console.log("Client didn't request anything. Sending index");
@@ -160,6 +193,45 @@ function  send_response(req, res){
                     res.write(data);
                     res.end();
                 });
+
+              }else if(filename == "static/order_form" && user_logged){
+
+                if (req.method === 'POST') {
+
+                  req.on('data', chunk => {
+                      //-- Leer los datos (convertir el buffer a cadena)
+                      data = chunk.toString('utf-8');
+                      data = data.split("&")
+                      console.log("Datos recibidos: " + data)
+                   });
+
+                   req.on('end', ()=> {
+                     //-- Generar el mensaje de respuesta
+                     let product_list = cookie.split(";");
+                     if(product_list[1] != undefined){
+                       product_list = product_list[1].substr(1);
+                       product_list = product_list.split("&");
+                       product_list.splice(0, 1);
+                     }
+                     var html_data = ""
+                     for(let i=0;i<data.length;i++){
+                       html_data += "<li>" + data[i] + "</li>"
+                     }
+                     html_data += "<br><h3>This are the items you ordered:</h3>"
+                     for(let i=0;i<product_list.length;i++){
+                       html_data += "<li>" + product_list[i] + "</li>"
+                     }
+                     res.setHeader('Content-Type', 'text/html')
+                     res.write("Your order has been received: " + "<br><br>" + html_data + "<br><a href='index.html'>Back to main page</a>");
+                     res.end();
+                     product_list = cookie.split(";");
+                     if(product_list[1] != undefined){
+                       product_list = product_list[1].substr(1);
+                       product_list = product_list.split("&");
+                       product_list.splice(0, 1);
+                     }
+                   });
+                }
 
               }else{
                 console.log('client requested resource:', filename, ' but cannot be found');
