@@ -145,8 +145,10 @@ function  send_response(req, res){
                found_items[i] = products_database[i];
              }
            }
+           let item_link = ""
            for(item in found_items){
-             html_data += '<li style="color:black"><a class="searchlink">' + found_items[item][0] + '</a>' + '</li>';
+             item_link = "<a href='" + found_items[item][1] + "'>"
+             html_data += '<li style="color:black">' + item_link + found_items[item][0] + '</a>' + '</li>';
            }
            html_data += "<br><a href='index.html'>Go back to main page</a>"
            res.setHeader('Content-Type', 'text/html');
