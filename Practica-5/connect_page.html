@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Connect Page</title>
+  </head>
+  <script>
+    var ipcRenderer = require('electron').ipcRenderer;
+
+    function send_ip(){
+      //console.log(document.getElementById("ip_box").value);
+      ipcRenderer.send('ip_add_msg', document.getElementById("ip_box").value);
+    }
+  </script>
+  <body>
+    <h2>Please, introduce chat server IP. Example: http://localhost:8080<h2>
+    <input id="ip_box" autocomplete="off" value="http://localhost:8080"/>
+    <button type="button" onclick="send_ip()" id="send">SEND</button>
+  </body>
+</html>
