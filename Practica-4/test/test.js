@@ -42,6 +42,7 @@ io.on('connection', function(socket){
   //console.log(user_cookie);
   user_db[user_id] = user_name;
   socket.emit('server_message', 'SERVER MESSAGE: ' + 'Welcome to the chat, ' + user_name);
+  console.log("Sent user welcome message");
   io.emit('server_message', 'SERVER MESSAGE: ' + user_name + ' connected to the chat'); //io.emit means broadcast. socket.emit is unicast
 
   socket.on('disconnect', function(){
@@ -63,7 +64,13 @@ io.on('connection', function(socket){
             break;
 
            case '/list':
-            socket.emit('server_message', 'SERVER MESSAGE: User list: ' + user_number);
+            let html_data = "SERVER MESSAGE: User list: " + user_number + ". ";
+            let user_list = [];
+            for(user in user_db){
+              user_list.push(user_db[user]);
+            }
+            html_data += user_list
+            socket.emit('server_message', html_data);
             break;
 
            case '/hello':
