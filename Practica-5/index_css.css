@@ -1,0 +1,57 @@
+body{
+    background-color: #55595e;
+}
+
+#display{
+    color: white;
+    font-family: monospace;
+    font-size: 20px;
+}
+
+#send{
+    border-radius: 5px;
+    width: 15%;
+    height: 5%;
+    font-size: 200%;
+    color: white;
+    background-color: #9463ff;
+    border-style: solid;
+    border-color: white;
+    box-shadow: 0 6px #999;
+    transform: translateY(2px);
+}
+
+#send:focus{
+    outline: none;
+}
+
+#send:hover {
+    background-color: #3e8e41
+}
+
+#send:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(5px);
+}
+
+#msg{
+    width: 80%;
+    height: 5%;
+    font-size:24px;
+    border-radius: 4px;
+    border-color: white;
+    background-color: #55595e;
+    color: white;
+    font-family: monospace;
+    border-style: solid;
+}
+
+#msg:focus{
+    outline: none;
+}
+
+#input_div{
+
+
+}

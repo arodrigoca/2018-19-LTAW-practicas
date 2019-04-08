@@ -64,12 +64,12 @@ io.on('connection', function(socket){
             break;
 
            case '/list':
-            let html_data = "SERVER MESSAGE: User list: " + user_number + ". ";
+            let html_data = "SERVER MESSAGE: User list: " + user_number + ". " + "[";
             let user_list = [];
             for(user in user_db){
               user_list.push(user_db[user]);
             }
-            html_data += user_list
+            html_data += user_list + "]"
             socket.emit('server_message', html_data);
             break;
 

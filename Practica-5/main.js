@@ -15,9 +15,11 @@ electron.app.on('ready', ()=>{
 
   // Crear la ventana principal de nuestra Interfaz Gráfica
   ip_window = new electron.BrowserWindow({
-      width: 600,
+      width: 800,
       height: 400
   });
+
+  ip_window.setResizable(false);
 
   //-------------------------------------------execute only when ip is known
 
@@ -34,9 +36,11 @@ ip_window.on('close', function(){
 
 //--------------------------------------------chat window
   win = new electron.BrowserWindow({
-    width: 600,
-    height: 400
+    width: 800,
+    height: 600
   });
+
+  win.setResizable(false);
 
   win.loadFile('index.html');
 
