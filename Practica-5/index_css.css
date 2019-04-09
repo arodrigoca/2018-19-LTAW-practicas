@@ -59,6 +59,21 @@ footer{
   height: 5%;
 }
 
-#footer_content{
-  background-color: black;
+.box-left-mini .front {
+    display: block;
+    z-index: 5;
+    position: relative;
+}
+.box-left-mini .front span {
+    background: #fff
+}
+
+.box-left-mini .behind_container {
+    background-color: #ff0;
+    position: relative;
+    top: -18px;
+}
+.box-left-mini .behind {
+    display: block;
+    z-index: 3;
 }
