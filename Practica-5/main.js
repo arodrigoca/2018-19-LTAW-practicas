@@ -40,7 +40,7 @@ ip_window.on('close', function(){
     height: 600
   });
 
-  win.setResizable(false);
+  //win.setResizable(false);
 
   win.loadFile('index.html');
 

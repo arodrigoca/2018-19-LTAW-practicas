@@ -16,6 +16,7 @@ body{
     border-color: white;
     box-shadow: 0 6px #999;
     transform: translateY(-1px);
+    margin-left: 1.5%;
     min-width: 17%;
     min-height: 150%;
     font-size: 150%;
@@ -54,6 +55,10 @@ body{
 footer{
   position: absolute;
   bottom: 5%;
-  width: 100%;
+  width: 98%;
   height: 5%;
+}
+
+#footer_content{
+  background-color: black;
 }
