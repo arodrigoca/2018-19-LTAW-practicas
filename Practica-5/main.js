@@ -36,7 +36,7 @@ ip_window.on('close', function(){
 
 //--------------------------------------------chat window
   win = new electron.BrowserWindow({
-    width: 800,
+    width: 860,
     height: 600
   });
 
