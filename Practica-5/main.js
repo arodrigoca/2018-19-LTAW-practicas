@@ -19,6 +19,10 @@ electron.app.on('ready', ()=>{
       height: 400
   });
 
+electron.app.on('window-all-closed', () => {
+  electron.app.quit();
+});
+
   ip_window.setResizable(false);
 
   //-------------------------------------------execute only when ip is known
@@ -43,6 +47,11 @@ ip_window.on('close', function(){
   //win.setResizable(false);
 
   win.loadFile('index.html');
+
+  win.on('close', function() { //   <---- Catch close event
+
+          win.removeAllListeners('close');
+  });
 
   win.webContents.once('dom-ready', () => {
 
