@@ -65,11 +65,9 @@ footer{
     position: relative;
 }
 .box-left-mini .front span {
-    background: #fff
 }
 
 .box-left-mini .behind_container {
-    background-color: #ff0;
     position: relative;
     top: -18px;
 }
