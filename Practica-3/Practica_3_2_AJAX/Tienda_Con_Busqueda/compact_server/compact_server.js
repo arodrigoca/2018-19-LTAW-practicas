@@ -33,19 +33,24 @@ function  send_response(req, res){
 
     var cookie = req.headers.cookie;
     if(!cookie){
-        console.log("User doesn´t have cookies");
+        //console.log("User doesn´t have cookies");
         var user_logged = false;
     }else{
-        console.log("User has cookies");
-        var user_logged = true;
+        if(cookie.includes('cart_item') == true && cookie.includes('user') == true){
+            //console.log("User has cookies");
+            var user_logged = true;
+        }else{
+            var user_logged = false;
+        }
     }
+    console.log(user_logged);
 
     var is_buy = filename.includes("buy");
     var is_cart = filename.includes("shopping_cart.html");
     var is_remove = filename.includes("empty_cart.html");
     var is_search = filename.includes("search_item");
     var is_search_bar = filename.includes("items_query");
-    console.log(is_search_bar);
+    //console.log(is_search_bar);
 
     if(is_buy && user_logged){
       product_list = cookie.split(";");
