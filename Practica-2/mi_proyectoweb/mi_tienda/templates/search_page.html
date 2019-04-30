@@ -6,16 +6,19 @@
   <link rel="stylesheet" href="{% static 'css/styleA.css' %}">
 </head>
 <body>
-  <h1>This are the products that matches your search</h1>
+  <h1>This are the products that matches your search. Click on name to go to product page.</h1>
   <br>
   <div>
-    {% for item in item_list %}
-        <a href="../product/{{item}}" style="color:white">{{item}}</a>
+
+    {% for key, value in item_images.items %}
+        <a href="../product/{{key}}" style="color:white; font-size:30px; text-decoration: none;">{{key}}</a>
+        <img height="42" width="42" src="../static/{{value}}"/>
         <br>
     {% endfor %}
+
   </div>
   <br>
   <br>
-  <a href="../">Back to main page</a>
+  <a style="color:white;" href="../">Back to main page</a>
 </body>
 </html>

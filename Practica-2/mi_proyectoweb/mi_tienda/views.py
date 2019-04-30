@@ -19,7 +19,7 @@ def list_items(request):
     products = Product.objects.all()
     html = "<p>Listado de articulos</p>"
     for item in products:
-        print(item.name)
+        #print(item.name)
         html += '<p>'+ item.name + ' ' + str(item.price) + '<p>'
 
     return HttpResponse(html)
@@ -42,13 +42,14 @@ def search_item(request):
         search_query = request.GET.get('search_box', None)
         matches = Product.objects.filter(name__contains=search_query)
         name_matches = []
-        image_matches = []
+        match_dict = {}
+
         for match in matches:
             name_matches.append(match.name)
-            image_matches.apppend('media/' + match.item_image)
+            match_dict[match.name] = 'media/' + match.item_image
 
-        #print name_matches
-        return render(request, "search_page.html", {'item_list': name_matches})
+        #print(match_dict)
+        return render(request, "search_page.html", {'item_list': name_matches, 'item_images':match_dict})
 
 
 def get_order(request):
