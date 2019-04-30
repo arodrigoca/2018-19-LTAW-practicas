@@ -42,10 +42,12 @@ def search_item(request):
         search_query = request.GET.get('search_box', None)
         matches = Product.objects.filter(name__contains=search_query)
         name_matches = []
+        image_matches = []
         for match in matches:
             name_matches.append(match.name)
+            image_matches.apppend('media/' + match.item_image)
 
-        print name_matches
+        #print name_matches
         return render(request, "search_page.html", {'item_list': name_matches})
 
 
