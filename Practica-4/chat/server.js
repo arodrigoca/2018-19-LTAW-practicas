@@ -1,7 +1,9 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 const http = require('http').Server(app);
 var io = require('socket.io')(http);
+
+app.use(express.static('public'));
 
 
 var user_number = 0;
